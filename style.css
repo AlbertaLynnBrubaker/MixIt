@@ -40,12 +40,6 @@ header.main {
     background-color: #69140e;
 }
 
-/* .main {
-  display: flex;
-  align-items: center;
-  
-} */
-
 .main h1 {
     display: flex;
     flex-wrap: wrap;
@@ -93,10 +87,14 @@ header.main {
 
 .sidebar ul li a:hover {
     background-color: #222;
- }
- 
+}
+
 .search {
   display: flex;
   height: 25px;
   display: none;
- }
+}
+
+#letter-dropdown {
+  display: none;
+}

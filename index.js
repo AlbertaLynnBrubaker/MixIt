@@ -3,13 +3,15 @@ let toggleNavStatus = false;
 const menuButton = document.querySelector('.btn-toggle-nav');
 const cocktailName = document.querySelector('#cocktail-name');
 const mainIngredient = document.querySelector('#main-ingredient');
+const firstLetter = document.querySelector('#first-letter');
 const nameSearchForm = document.querySelector('#search-name');
 const ingredientSearchForm = document.querySelector('#search-ingredient');
+const letterDropdown = document.querySelector('#letter-dropdown');
 const baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1/';
-const byName = 'search.php?s='
-const byIngredient = 'filter.php?i='
-const byLetter = 'search.php?f='
-const random = 'random.php'
+const byName = 'search.php?s=';
+const byIngredient = 'filter.php?i=';
+const byLetter = 'search.php?f=';
+const random = 'random.php';
 
 let toggleNav = function() {
     let getSidebar = document.querySelector(".sidebar");
@@ -55,6 +57,13 @@ mainIngredient.addEventListener('click', (e) => {
   ingredientSearchForm.style.display = 'block';
 })
 
+firstLetter.addEventListener('click', () => {
+  populateLetterDropdown();
+  letterDropdown.style.display = 'block';
+})
+
+// Create random cocktail listener
+
 nameSearchForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
@@ -78,10 +87,22 @@ function fetchRequest(trailingUrl, input) {
   .then(res => res.json())
 }
 
-// function handleForm(e) {
-//   const input = e.target.input.value;
+function populateLetterDropdown() {
+  const alphabet = [
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+    'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+    'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+    'Y', 'Z'
+  ]
 
-//   console.log(input);
-// }
+  alphabet.forEach(letter => {
+    const option = document.createElement('option');
+
+    option.value = letter.toLowerCase();
+    option.textContent = letter;
+
+    letterDropdown.append(option);
+  })
+}
 
 menuButton.addEventListener('click', toggleNav)
