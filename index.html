@@ -10,16 +10,20 @@
 </head>
 <body>
     <header class="main">
-        <div class="btn-toggle-nav"></div>
         <h1></h1>
+        <form id='search'>
+          <input type='text' name='input' placeholder='Enter Search Here'>
+          <input type='submit'>
+        </form>
     </header>
+    <div class="btn-toggle-nav"></div>
     <nav class="sidebar">
         <ul>
             <li><span>Search By:</span></li>
-            <li><a href='#'>Cocktail Name</a></li>
-            <li><a href='#'>First Letter of Cocktail</a></li>
-            <li><a href='#'>Main Ingredient</a></li>
-            <li><a href='#'>Random Cocktail</a></li>
+            <li><a href='#' id='cocktail-name'>Cocktail Name</a></li>
+            <li><a href='#' id='first-letter'>First Letter of Cocktail</a></li>
+            <li><a href='#' id='main-ingredient'>Main Ingredient</a></li>
+            <li><a href='#' id='random-cocktail'>Random Cocktail</a></li>
         </ul>
     </nav>
 </body>

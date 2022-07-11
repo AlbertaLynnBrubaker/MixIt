@@ -1,8 +1,13 @@
 let toggleNavStatus = false;
 
-const menuButton = document.querySelector('div.btn-toggle-nav');
-
-console.log(menuButton)
+const menuButton = document.querySelector('.btn-toggle-nav');
+const cocktailName = document.querySelector('#cocktail-name');
+const searchForm = document.querySelector('#search');
+const baseUrl = 'www.thecocktaildb.com/api/json/v1/1/';
+const byName = 'search.php?s='
+const byIngredient = 'filter.php?i='
+const byLetter = 'search.php?f='
+const random = 'random.php'
 
 let toggleNav = function() {
     let getSidebar = document.querySelector(".sidebar");
@@ -36,6 +41,22 @@ let toggleNav = function() {
 
         toggleNavStatus = false;
     }
+}
+
+cocktailName.addEventListener('click', (e) => {
+  searchForm.style.visibility = 'visible';
+})
+
+searchForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  handleForm(e);
+})
+
+function handleForm(e) {
+  const input = e.target.input.value;
+
+  console.log(input);
 }
 
 menuButton.addEventListener('click', toggleNav)

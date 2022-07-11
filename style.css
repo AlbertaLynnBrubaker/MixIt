@@ -18,6 +18,8 @@ header.main {
     display: flex;
     flex-wrap: wrap;
     z-index: 900;
+    justify-content: center;
+    align-items: center;
 }
 
 .btn-toggle-nav {
@@ -31,11 +33,18 @@ header.main {
     cursor: pointer;
     z-index: 1000;
     transition: all 0.3s ease-in-out;
+    position: fixed;
 }
 
 .btn-toggle-nav:hover {
     background-color: #69140e;
 }
+
+/* .main {
+  display: flex;
+  align-items: center;
+  
+} */
 
 .main h1 {
     display: flex;
@@ -86,3 +95,8 @@ header.main {
     background-color: #222;
  }
  
+ #search {
+  display: flex;
+  height: 25px;
+  visibility: hidden;
+ }
