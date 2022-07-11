@@ -9,3 +9,5 @@
 4) Append search to main body of page on left half
 
 5) Create event listener on each populated cocktail option to open another more detailed page on the right half of the main body
+
+6) Fine tune details layout

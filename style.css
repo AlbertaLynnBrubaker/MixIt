@@ -68,6 +68,7 @@ header.main {
     margin-top: 120px;
     width: calc(100% - 120px);
     transition: all 0.3s ease-in-out;
+    text-align: center;
 }
 
 #drink-list {
