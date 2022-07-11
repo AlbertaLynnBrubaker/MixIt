@@ -2,8 +2,10 @@ let toggleNavStatus = false;
 
 const menuButton = document.querySelector('.btn-toggle-nav');
 const cocktailName = document.querySelector('#cocktail-name');
-const searchForm = document.querySelector('#search');
-const baseUrl = 'www.thecocktaildb.com/api/json/v1/1/';
+const mainIngredient = document.querySelector('#main-ingredient');
+const nameSearchForm = document.querySelector('#search-name');
+const ingredientSearchForm = document.querySelector('#search-ingredient');
+const baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1/';
 const byName = 'search.php?s='
 const byIngredient = 'filter.php?i='
 const byLetter = 'search.php?f='
@@ -44,19 +46,42 @@ let toggleNav = function() {
 }
 
 cocktailName.addEventListener('click', (e) => {
-  searchForm.style.visibility = 'visible';
+  ingredientSearchForm.style.display = 'none';
+  nameSearchForm.style.display = 'block';
 })
 
-searchForm.addEventListener('submit', (e) => {
+mainIngredient.addEventListener('click', (e) => {
+  nameSearchForm.style.display = 'none';
+  ingredientSearchForm.style.display = 'block';
+})
+
+nameSearchForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  handleForm(e);
-})
-
-function handleForm(e) {
   const input = e.target.input.value;
 
-  console.log(input);
+  fetchRequest(byName, input)
+  .then(data => console.log(data));
+})
+
+ingredientSearchForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const input = e.target.input.value;
+
+  fetchRequest(byIngredient, input)
+  .then(data => console.log(data));
+})
+
+function fetchRequest(trailingUrl, input) {
+  return fetch(baseUrl + trailingUrl + input)
+  .then(res => res.json())
 }
+
+// function handleForm(e) {
+//   const input = e.target.input.value;
+
+//   console.log(input);
+// }
 
 menuButton.addEventListener('click', toggleNav)

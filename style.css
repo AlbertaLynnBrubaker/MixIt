@@ -95,8 +95,8 @@ header.main {
     background-color: #222;
  }
  
- #search {
+.search {
   display: flex;
   height: 25px;
-  visibility: hidden;
+  display: none;
  }
