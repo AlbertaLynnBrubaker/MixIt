@@ -25,6 +25,8 @@ header.main {
 .btn-toggle-nav {
     width: 100px;
     height: 100px;
+    margin-left: 0;
+    margin-top: 0;
     background-color: #3c1518;
     background-image: url(#);
     background-repeat: no-repeat;
@@ -60,6 +62,31 @@ header.main {
     transition: all 0.3s ease-in-out;
 }
 
+#drinks-container {
+    display: inline-flex;
+    margin-left: 120px;
+    margin-top: 120px;
+    width: calc(100% - 120px);
+    transition: all 0.3s ease-in-out;
+}
+
+#drink-list {
+    width: 50%;
+}
+
+#drink-details {
+    width: 50%;
+}
+
+.drink-thumb {
+    width: 50px;
+    height: auto;
+}
+
+#drink-list img {
+    padding-right:10px;
+}
+
 .sidebar ul {
    padding-top: 15px;
     overflow: hidden;
@@ -90,11 +117,11 @@ header.main {
 }
 
 .search {
-  display: flex;
   height: 25px;
   display: none;
 }
 
-#letter-dropdown {
-  display: none;
+.detail-image {
+    width: 360px;
+    height: auto;
 }
