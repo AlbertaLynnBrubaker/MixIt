@@ -30,7 +30,7 @@ header.main {
     background-position: center;
     cursor: pointer;
     z-index: 1000;
-
+    transition: all 0.3s ease-in-out;
 }
 
 .btn-toggle-nav:hover {
