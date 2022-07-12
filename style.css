@@ -28,9 +28,9 @@ header.main {
     margin-left: 0;
     margin-top: 0;
     background-color: #3c1518;
-    background-image: url(#);
+    background-image: url("./images/MenuWhite.png");
     background-repeat: no-repeat;
-    background-size: 40%;
+    background-size: 80px;
     background-position: center;
     cursor: pointer;
     z-index: 1000;
