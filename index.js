@@ -63,7 +63,7 @@ function renderList(data) {
 
     data.drinks.forEach(drink => {
         console.log(drink)
-        const drinkItem = document.createElement('p');
+        const drinkItem = document.createElement('h3');
         const drinkThumb = document.createElement('img');
         drinkThumb.className = "drink-thumb";
 
