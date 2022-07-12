@@ -9,30 +9,27 @@ const nameSearchForm = document.querySelector('#search-name');
 const ingredientSearchForm = document.querySelector('#search-ingredient');
 const letterDropdown = document.querySelector('#letter-dropdown');
 const searchForms = document.querySelectorAll('.search');
-const drinksContainer = document.querySelector('#drinks-container');
 const drinksListContainer = document.querySelector('#drink-list');
 const detailContainer = document.querySelector('#drink-details');
-const baseUrl = 'https://www.thecocktaildb.com/api/json/v1/1/';
 const byName = 'search.php?s=';
 const byIngredient = 'filter.php?i=';
 const byLetter = 'search.php?f=';
 const random = 'random.php';
 
-let toggleNav = function() {
-    let getSidebar = document.querySelector(".sidebar");
-    let getSidebarUl = document.querySelector(".sidebar ul");
-    let getSidebarTitle = document.querySelector(".sidebar span");
-    let getSidebarLinks = document.querySelectorAll(".sidebar a");
-
-
+function toggleNav() {
+    const getSidebar = document.querySelector(".sidebar");
+    const getSidebarUl = document.querySelector(".sidebar ul");
+    const getSidebarTitle = document.querySelector(".sidebar span");
+    const getSidebarLinks = document.querySelectorAll(".sidebar a");
+    const drinksContainer = document.querySelector('#drinks-container');
 
     if (toggleNavStatus === false) {
         getSidebarUl.style.visibility = "visible";
         menuButton.style.width = "300px";
         getSidebar.style.width = "290px";
         getSidebarTitle.style.opacity = "0.5";
-        drinksContainer.style.marginLeft = "320px"
-        drinksContainer.style.width = "calc(100% - 320px)"
+        drinksContainer.style.marginLeft = "320px";
+        drinksContainer.style.width = "calc(100% - 320px)";
 
         for (let i = 0; i < getSidebarLinks.length; i++) {
             getSidebarLinks[i].style.opacity = "1";
@@ -43,8 +40,8 @@ let toggleNav = function() {
         getSidebar.style.width = "90px";
         menuButton.style.width = "100px";
         getSidebarTitle.style.opacity = "0";
-        drinksContainer.style.marginLeft = "120px"
-        drinksContainer.style.width = "calc(100% - 120px)"
+        drinksContainer.style.marginLeft = "120px";
+        drinksContainer.style.width = "calc(100% - 120px)";
 
         for (let i = 0; i < getSidebarLinks.length; i++) {
             getSidebarLinks[i].style.opacity = "0";
@@ -56,52 +53,55 @@ let toggleNav = function() {
     }
 }
 
+// Render functions
 function renderList(data) {
-    drinksListContainer.innerHTML = ''
+    drinksListContainer.innerHTML = '';
 
     fetchRequest(byName, data.drinks[0].strDrink)
-        .then(drink => renderDrinkCard(drink.drinks[0]))
+        .then(drink => renderDrinkCard(drink.drinks[0]));
 
     data.drinks.forEach(drink => {
-        console.log(drink)
-        const drinkItem = document.createElement('h3');
+        const drinkListItem = document.createElement('li');
+        const drinkName = document.createElement('h3');
         const drinkThumb = document.createElement('img');
         drinkThumb.className = "drink-thumb";
+        drinkListItem.className = "drink-list-item";
 
         drinkThumb.src = drink.strDrinkThumb;
         
-        drinkItem.textContent = drink.strDrink;
-        drinkItem.prepend(drinkThumb)
-        drinksListContainer.append(drinkItem);
+        drinkName.textContent = drink.strDrink;
+        drinkListItem.append(drinkThumb);
+        drinkListItem.append(drinkName);
+        drinksListContainer.append(drinkListItem);
 
-        drinkItem.addEventListener('click', () => {
+        drinkListItem.addEventListener('click', () => {
           fetchRequest(byName, drink.strDrink)
-          .then(drink => renderDrinkCard(drink.drinks[0]))
+          .then(drink => renderDrinkCard(drink.drinks[0]));
         })
     })
 }
 
 function renderDrinkCard(drink) {
-    detailContainer.innerHTML = ''
-    const detailName = document.createElement('h3')
-    const detailImage = document.createElement('img')
-    const ingredientsTitle = document.createElement('h4')
-    const detailIngredients = document.createElement('ul')
-    const instructionsTitle = document.createElement('h4')
-    const detailInstructions = document.createElement('p')
-    const glassTitle = document.createElement('h4')
-    const glassType = document.createElement('p')
+    detailContainer.innerHTML = '';
+    const detailName = document.createElement('h3');
+    const detailImage = document.createElement('img');
+    const ingredientsTitle = document.createElement('h4');
+    const detailIngredients = document.createElement('ul');
+    const instructionsTitle = document.createElement('h4');
+    const detailInstructions = document.createElement('p');
+    const glassTitle = document.createElement('h4');
+    const glassType = document.createElement('p');
     
-    detailImage.className = "detail-image"
+    detailImage.className = "detail-image";
     detailName.textContent = drink.strDrink;
     detailImage.src = drink.strDrinkThumb;
 
-    instructionsTitle.textContent = 'Instructions: '
-    ingredientsTitle.textContent = 'Ingredients:'
+    instructionsTitle.textContent = 'Instructions: ';
+    ingredientsTitle.textContent = 'Ingredients:';
 
     detailInstructions.textContent = drink.strInstructions;
 
-    glassTitle.textContent = 'Glass: '
+    glassTitle.textContent = 'Glass: ';
     glassType.textContent = drink.strGlass;
 
     const drinkIngredients = [];
@@ -110,11 +110,11 @@ function renderDrinkCard(drink) {
         if(drink[`strIngredient${i}`] === null) {
             break;
         } else if (drink[`strMeasure${i}`] === null) {
-          ingredientString = drink[`strIngredient${i}`]
+          ingredientString = drink[`strIngredient${i}`];
         } else {
-          ingredientString = drink[`strMeasure${i}`] + ' of ' + drink[`strIngredient${i}`]
+          ingredientString = drink[`strMeasure${i}`] + ' of ' + drink[`strIngredient${i}`];
         }
-        drinkIngredients.push(ingredientString)
+        drinkIngredients.push(ingredientString);
     }
     
     drinkIngredients.forEach(ingredient => {
@@ -124,23 +124,36 @@ function renderDrinkCard(drink) {
     })
 
     detailContainer.append(
-      detailName, 
-      detailImage, 
-      glassTitle, 
-      glassType, 
-      ingredientsTitle, 
-      detailIngredients, 
-      instructionsTitle, 
-      detailInstructions
-      )
+      detailName, detailImage, glassTitle, glassType, 
+      ingredientsTitle, detailIngredients, instructionsTitle, detailInstructions
+    )
 }
+
+function populateLetterDropdown() {
+    const alphabet = [
+      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+      'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+      'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+      'Y', 'Z'
+    ]
+
+    alphabet.forEach(letter => {
+      const option = document.createElement('option');
+
+      option.value = letter.toLowerCase();
+      option.textContent = letter;
+
+      letterDropdown.append(option);
+    })
+}
+
+// Event listeners
 cocktailName.addEventListener('click', (e) => {
-  drinksListContainer.style.display = ''
-  drinksListContainer.innerHTML = ''
+    drinksListContainer.style.display = ''
+    drinksListContainer.innerHTML = ''
     searchForms.forEach(searchForm => {
         searchForm.style.display = 'none'
     })
-//   ingredientSearchForm.style.display = 'none';
   nameSearchForm.style.display = 'block';
 })
 
@@ -148,8 +161,7 @@ mainIngredient.addEventListener('click', (e) => {
     searchForms.forEach(searchForm => {
         searchForm.style.display = 'none'
     })
-//   nameSearchForm.style.display = 'none';
-  ingredientSearchForm.style.display = 'block';
+    ingredientSearchForm.style.display = 'block';
 })
 
 firstLetter.addEventListener('click', () => {
@@ -157,70 +169,68 @@ firstLetter.addEventListener('click', () => {
         searchForm.style.display = 'none'
     })
 
-  populateLetterDropdown();
-  letterDropdown.style.display = 'block';
+    populateLetterDropdown();
+    letterDropdown.style.display = 'block';
 })
 
 letterDropdown.addEventListener('change', (e) => {
-  fetchRequest(byLetter, e.target.value)
-  .then(renderList)
+    fetchRequest(byLetter, e.target.value)
+    .then(renderList)
 })
 
-// Create random cocktail listener
 randomCocktail.addEventListener('click', () => {
-  drinksListContainer.style.display = 'none'
-  detailContainer.style.width = '100%'
+    drinksListContainer.style.display = 'none'
+    detailContainer.style.width = '100%'
 
-  fetchRequest(random)
-  // .then(drink => console.log(drink.drinks))
-  .then(drink => {
-    renderDrinkCard(drink.drinks[0])
-  })
+    fetchRequest(random)
+    .then(drink => {
+      renderDrinkCard(drink.drinks[0])
+    })
 })
 
 nameSearchForm.addEventListener('submit', (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const input = e.target.input.value;
+    const input = e.target.input.value;
 
-  fetchRequest(byName, input)
-  .then(renderList);
+    fetchRequest(byName, input)
+    .then(renderList);
 
-  nameSearchForm.reset();
+    nameSearchForm.reset();
 })
 
 ingredientSearchForm.addEventListener('submit', (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const input = e.target.input.value;
+    const input = e.target.input.value;
 
-  fetchRequest(byIngredient, input)
-  .then(renderList);
+    fetchRequest(byIngredient, input)
+    .then(renderList);
 
-  ingredientSearchForm.reset();
+    ingredientSearchForm.reset();
 })
 
-function fetchRequest(trailingUrl, input = '') {
-  return fetch(baseUrl + trailingUrl + input)
-  .then(res => res.json())
-}
-
-function populateLetterDropdown() {
-  const alphabet = [
-    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
-    'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
-    'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
-    'Y', 'Z'
-  ]
-
-  alphabet.forEach(letter => {
-    const option = document.createElement('option');
-
-    option.value = letter.toLowerCase();
-    option.textContent = letter;
-
-    letterDropdown.append(option);
-  })
-}
-
 menuButton.addEventListener('click', toggleNav)
+
+function fetchRequest(trailingUrl, input = '') {
+    return fetch('https://www.thecocktaildb.com/api/json/v1/1/' + trailingUrl + input)
+    .then(res => res.json())
+}
+
+// data.drinks.forEach(drink => {
+    //     console.log(drink)
+    //     const drinkItem = document.createElement('h3');
+    //     const drinkThumb = document.createElement('img');
+    //     drinkThumb.className = "drink-thumb";
+
+    //     drinkThumb.src = drink.strDrinkThumb;
+        
+    //     drinkItem.textContent = drink.strDrink;
+    //     drinkItem.prepend(drinkThumb)
+    //     drinksListContainer.append(drinkItem);
+
+    //     drinkItem.addEventListener('click', () => {
+    //       fetchRequest(byName, drink.strDrink)
+    //       .then(drink => renderDrinkCard(drink.drinks[0]))
+    //     })
+    // })
