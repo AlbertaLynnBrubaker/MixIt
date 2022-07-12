@@ -115,7 +115,7 @@ function renderDrinkCard(drink) {
         } else if (drink[`strMeasure${i}`] === null) {
           ingredientString = drink[`strIngredient${i}`];
         } else {
-          ingredientString = drink[`strMeasure${i}`] + ' of ' + drink[`strIngredient${i}`];
+          ingredientString = drink[`strMeasure${i}`] + ' ' + drink[`strIngredient${i}`];
         }
         drinkIngredients.push(ingredientString);
     }
@@ -215,25 +215,8 @@ ingredientSearchForm.addEventListener('submit', (e) => {
 
 menuButton.addEventListener('click', toggleNav)
 
+// Fetch Request
 function fetchRequest(trailingUrl, input = '') {
     return fetch('https://www.thecocktaildb.com/api/json/v1/1/' + trailingUrl + input)
     .then(res => res.json())
 }
-
-// data.drinks.forEach(drink => {
-    //     console.log(drink)
-    //     const drinkItem = document.createElement('h3');
-    //     const drinkThumb = document.createElement('img');
-    //     drinkThumb.className = "drink-thumb";
-
-    //     drinkThumb.src = drink.strDrinkThumb;
-        
-    //     drinkItem.textContent = drink.strDrink;
-    //     drinkItem.prepend(drinkThumb)
-    //     drinksListContainer.append(drinkItem);
-
-    //     drinkItem.addEventListener('click', () => {
-    //       fetchRequest(byName, drink.strDrink)
-    //       .then(drink => renderDrinkCard(drink.drinks[0]))
-    //     })
-    // })

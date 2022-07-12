@@ -5,7 +5,6 @@
 }
 
 body {
-    /* background-color: #d58936; */
     background-color: #f3e2ae;
 }
 
@@ -112,10 +111,6 @@ header.main {
 #drink-list img {
     padding-right:10px;
 }
-
-/* #drink-list h3 {
-  padding-bottom: 10px;
-} */
 
 #drink-details {
     width: 50%;
