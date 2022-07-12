@@ -1,6 +1,7 @@
 let toggleNavStatus = false;
 
 const menuButton = document.querySelector('.btn-toggle-nav');
+const headerMain = document.querySelector('.main');
 const cocktailName = document.querySelector('#cocktail-name');
 const mainIngredient = document.querySelector('#main-ingredient');
 const firstLetter = document.querySelector('#first-letter');
@@ -30,6 +31,7 @@ function toggleNav() {
         getSidebarTitle.style.opacity = "0.5";
         drinksContainer.style.marginLeft = "320px";
         drinksContainer.style.width = "calc(100% - 320px)";
+        headerMain.style.marginLeft = '300px';
 
         for (let i = 0; i < getSidebarLinks.length; i++) {
             getSidebarLinks[i].style.opacity = "1";
@@ -42,6 +44,7 @@ function toggleNav() {
         getSidebarTitle.style.opacity = "0";
         drinksContainer.style.marginLeft = "120px";
         drinksContainer.style.width = "calc(100% - 120px)";
+        headerMain.style.marginLeft = '100px';
 
         for (let i = 0; i < getSidebarLinks.length; i++) {
             getSidebarLinks[i].style.opacity = "0";
