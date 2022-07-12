@@ -59,7 +59,8 @@ let toggleNav = function() {
 function renderList(data) {
     drinksListContainer.innerHTML = ''
 
-    renderDrinkCard(data.drinks[0])
+    fetchRequest(byName, data.drinks[0].strDrink)
+        .then(drink => renderDrinkCard(drink.drinks[0]))
 
     data.drinks.forEach(drink => {
         console.log(drink)
@@ -73,7 +74,10 @@ function renderList(data) {
         drinkItem.prepend(drinkThumb)
         drinksListContainer.append(drinkItem);
 
-        drinkItem.addEventListener('click', () => renderDrinkCard(drink))
+        drinkItem.addEventListener('click', () => {
+          fetchRequest(byName, drink.strDrink)
+          .then(drink => renderDrinkCard(drink.drinks[0]))
+        })
     })
 }
 
@@ -101,13 +105,18 @@ function renderDrinkCard(drink) {
     glassType.textContent = drink.strGlass;
 
     const drinkIngredients = [];
+    let ingredientString;
     for (let i = 1; i < 16 ; i++) {
         if(drink[`strIngredient${i}`] === null) {
             break;
+        } else if (drink[`strMeasure${i}`] === null) {
+          ingredientString = drink[`strIngredient${i}`]
+        } else {
+          ingredientString = drink[`strMeasure${i}`] + ' of ' + drink[`strIngredient${i}`]
         }
-        const ingredientString = drink[`strMeasure${i}`] + ' of ' + drink[`strIngredient${i}`]
         drinkIngredients.push(ingredientString)
     }
+    
     drinkIngredients.forEach(ingredient => {
         const detailIngredient = document.createElement('li')
         detailIngredient.textContent = ingredient
