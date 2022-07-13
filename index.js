@@ -161,6 +161,8 @@ cocktailName.addEventListener('click', (e) => {
 })
 
 mainIngredient.addEventListener('click', (e) => {
+    drinksListContainer.style.display = ''
+    drinksListContainer.innerHTML = ''
     searchForms.forEach(searchForm => {
         searchForm.style.display = 'none'
     })
@@ -168,6 +170,8 @@ mainIngredient.addEventListener('click', (e) => {
 })
 
 firstLetter.addEventListener('click', () => {
+    drinksListContainer.style.display = ''
+    drinksListContainer.innerHTML = ''
     searchForms.forEach(searchForm => {
         searchForm.style.display = 'none'
     })
@@ -184,6 +188,9 @@ letterDropdown.addEventListener('change', (e) => {
 randomCocktail.addEventListener('click', () => {
     drinksListContainer.style.display = 'none'
     detailContainer.style.width = '100%'
+    searchForms.forEach(searchForm => {
+        searchForm.style.display = 'none'
+    })
 
     fetchRequest(random)
     .then(drink => {
