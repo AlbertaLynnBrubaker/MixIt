@@ -59,6 +59,13 @@ function toggleNav() {
 // Render functions
 function renderList(data) {
     drinksListContainer.innerHTML = '';
+    if(!data.drinks) {
+      const p = document.createElement('p');
+      p.textContent = 'No results found';
+      p.className = 'no-results-p';
+      drinksListContainer.append(p);
+      return;
+    }
 
     fetchRequest(byName, data.drinks[0].strDrink)
         .then(drink => renderDrinkCard(drink.drinks[0]));
@@ -152,8 +159,8 @@ function populateLetterDropdown() {
 
 // Event listeners
 cocktailName.addEventListener('click', (e) => {
-    drinksListContainer.style.display = ''
-    drinksListContainer.innerHTML = ''
+    // drinksListContainer.style.display = ''
+    // drinksListContainer.innerHTML = ''
     searchForms.forEach(searchForm => {
         searchForm.style.display = 'none'
     })
@@ -161,8 +168,8 @@ cocktailName.addEventListener('click', (e) => {
 })
 
 mainIngredient.addEventListener('click', (e) => {
-    drinksListContainer.style.display = ''
-    drinksListContainer.innerHTML = ''
+    // drinksListContainer.style.display = ''
+    // drinksListContainer.innerHTML = ''
     searchForms.forEach(searchForm => {
         searchForm.style.display = 'none'
     })
@@ -171,7 +178,7 @@ mainIngredient.addEventListener('click', (e) => {
 
 firstLetter.addEventListener('click', () => {
     drinksListContainer.style.display = ''
-    drinksListContainer.innerHTML = ''
+    // drinksListContainer.innerHTML = ''
     searchForms.forEach(searchForm => {
         searchForm.style.display = 'none'
     })
@@ -181,6 +188,8 @@ firstLetter.addEventListener('click', () => {
 })
 
 letterDropdown.addEventListener('change', (e) => {
+  drinksListContainer.innerHTML = ''
+  drinksListContainer.style.display = 'block'
     fetchRequest(byLetter, e.target.value)
     .then(renderList)
 })
@@ -200,6 +209,7 @@ randomCocktail.addEventListener('click', () => {
 
 nameSearchForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    drinksListContainer.innerHTML = ''
 
     const input = e.target.input.value;
 
@@ -211,6 +221,7 @@ nameSearchForm.addEventListener('submit', (e) => {
 
 ingredientSearchForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    drinksListContainer.innerHTML = ''
 
     const input = e.target.input.value;
 
@@ -221,6 +232,8 @@ ingredientSearchForm.addEventListener('submit', (e) => {
 })
 
 menuButton.addEventListener('click', toggleNav)
+
+window.addEventListener('submit', () => {drinksListContainer.style.display = 'block'})
 
 // Fetch Request
 function fetchRequest(trailingUrl, input = '') {
