@@ -116,7 +116,7 @@ header.main {
 
 @media (max-width: 1100px) {
     #drink-list {
-        padding-left: 0%;
+        padding-left: 8px;
         width: 50%;
     }
 }
