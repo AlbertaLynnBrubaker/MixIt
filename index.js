@@ -157,32 +157,26 @@ function populateLetterDropdown() {
     })
 }
 
+function hideForms() {
+  searchForms.forEach(searchForm => {
+    searchForm.style.display = 'none'
+  })
+}
+
 // Event listeners
 cocktailName.addEventListener('click', (e) => {
-    // drinksListContainer.style.display = ''
-    // drinksListContainer.innerHTML = ''
-    searchForms.forEach(searchForm => {
-        searchForm.style.display = 'none'
-    })
+  hideForms();
   nameSearchForm.style.display = 'block';
 })
 
 mainIngredient.addEventListener('click', (e) => {
-    // drinksListContainer.style.display = ''
-    // drinksListContainer.innerHTML = ''
-    searchForms.forEach(searchForm => {
-        searchForm.style.display = 'none'
-    })
+  hideForms();
     ingredientSearchForm.style.display = 'block';
 })
 
 firstLetter.addEventListener('click', () => {
-    drinksListContainer.style.display = ''
-    // drinksListContainer.innerHTML = ''
-    searchForms.forEach(searchForm => {
-        searchForm.style.display = 'none'
-    })
-
+    drinksListContainer.style.display = '';
+    hideForms();
     populateLetterDropdown();
     letterDropdown.style.display = 'block';
 })
@@ -198,9 +192,8 @@ letterDropdown.addEventListener('change', (e) => {
 randomCocktail.addEventListener('click', () => {
     drinksListContainer.style.display = 'none'
     detailContainer.style.width = '100%'
-    searchForms.forEach(searchForm => {
-        searchForm.style.display = 'none'
-    })
+    
+    hideForms();
 
     fetchRequest(random)
     .then(drink => {
