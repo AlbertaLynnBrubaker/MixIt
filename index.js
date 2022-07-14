@@ -190,6 +190,7 @@ firstLetter.addEventListener('click', () => {
 letterDropdown.addEventListener('change', (e) => {
   drinksListContainer.innerHTML = ''
   drinksListContainer.style.display = 'block'
+  detailContainer.style.width = '50%'
     fetchRequest(byLetter, e.target.value)
     .then(renderList)
 })
@@ -233,7 +234,10 @@ ingredientSearchForm.addEventListener('submit', (e) => {
 
 menuButton.addEventListener('click', toggleNav)
 
-window.addEventListener('submit', () => {drinksListContainer.style.display = 'block'})
+window.addEventListener('submit', () => {
+  drinksListContainer.style.display = 'block'
+  detailContainer.style.width = '50%'
+})
 
 // Fetch Request
 function fetchRequest(trailingUrl, input = '') {
