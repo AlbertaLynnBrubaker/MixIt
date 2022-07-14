@@ -36,6 +36,8 @@ Finally, clicking on any of the cocktails in the list will load the details of t
 
 The final menu item in the sidebar will load the details of a cocktail randomly in the body of the page.
 
+Remember to drink responsibly!
+
 ## Accessing the API Source Material
 
 We used [TheCocktailDB](https://www.thecocktaildb.com/api.php) as the API for our project. The creator of the API can be reached at: [thedatadb@gmail.com](mailto:thedatadb@gmail.com).
