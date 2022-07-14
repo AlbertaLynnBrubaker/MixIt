@@ -87,7 +87,7 @@ header.main {
 
 #drink-list {
     width: 20%;
-    padding-left: 0px;
+    padding-left: 8px;
     border: 2px solid #3c1518;
     border-radius: 25px;
     background-color: rgba(255, 255, 255, .5);
@@ -116,7 +116,6 @@ header.main {
 
 @media (max-width: 1100px) {
     #drink-list {
-        padding-left: 8px;
         width: 50%;
     }
 }
